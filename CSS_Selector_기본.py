@@ -66,14 +66,3 @@ for link in links:
     if re.search('http://\w+', link['href']):
         print(i, '.', link['href'])
     i += 1
-
-# 네이버 부동산 아파트명, 가격 가져오기
-res = requests.get('https://new.land.naver.com/complexes?ms=37.517408,127.047313,15&a=APT:JGC:ABYG&e=RETAIL')
-soup = BeautifulSoup(res.content, 'html.parser')
-
-# a 태그이면서 href 속성 값이 특정한 값을 갖는 경우 탐색
-link_title = soup.find_all('div', class_='complex_title')
-link_price = soup.find_all('span', class_='price_default')
-
-for num in range(len(link_price)):
-    print(link_title[num].get_text(), link_price[num].get_text())
